@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="webon.js"></script>
+
+<title>Webon Example</title>
+</head>
+<!-- Pattern for JVM stats -->
+<div id='template-jvm' class='pattern' style='display: none'>
+	<ul style='display: inline-block; width: 300px'>
+		States @
+		<label class='view' name='timestamp' style='text-decoration: blink'>?</label>
+		<li>Classes Loaded: <span name='classes' class='view'
+			style='text-decoration: underline; color: red'>?</span>
+		<li>Average System Load: <span name='avgLoad' class='view'
+			style='text-decoration: underline; color: red'>?</span>
+		<li>Used Heap: <span name='memory' class='view'
+			style='text-decoration: underline; color: red'>? </span> MB
+	</ul>
+</div>
+
+<!-- Pattern for queue -->
+<div id='template-queue' style='display: none'>
+	<span style='background: #f0f0ff'> Serving: <span
+		name='currentlyServing()' class='attr' style='color:blue'>?</span> | Waiting: <span
+		name='queueLength()' class='attr' style='color:blue'>?</span> | Customers Today: <span
+		name='totalCustomer' class='attr' style='color:blue'>?</span>
+</div>
+
+<body>
+	<h3>What's under webon ROOT? -- /</h3>
+	<p id='root'>
+	<h3>JVM State -- /jvm (Shown in two ways)</h3>
+	<p>
+		<span id='jvm1'></span><span id='jvm2'></span>
+	<h3>Operating System Brief -- /OS</h3>
+	<p id='os'>
+	<h3>Bank Service Queues</h3>
+	<ul id='queue'></ul>
+</body>
+<script type="text/javascript">
+	var webon = new Webon("/webon", "/webon");
+
+	// Show root
+	weblet = webon.include("/");
+	$box = $("<div style='display:inline-block; width:250px; border: 6px ridge #f0f0ff; padding: 5px'>");
+	$("#root").append($box);
+	weblet.showOn(new ManifestSuite($box));
+
+	// JVM - template show
+	weblet = webon.include("/jvm");
+	pattern = $("#template-jvm").html();
+	suite = html2Suite(pattern, "view", $("#jvm1"));
+	weblet.showOn(suite);
+
+	// JVM - manifest show
+	$box = $("<div style='display:inline-block; width:250px; background: #f0fff0; padding: 5px'>");
+	$("#jvm2").append($box);
+	weblet.showOn(new ManifestSuite($box));
+
+	// heap memory 
+	weblet = webon.include("OS");
+	$box = $("<div style='display:inline-block; width:400px; background: #fff0f0; padding: 5px'>");
+	$("#os").append($box);
+	weblet.showOn(new ManifestSuite($box));
+
+	// ICBC queue
+	var banks = [ "ICBC", "HSBC", "CCB" ];
+	for ( var i = 0; i < banks.length; i++) {
+		path = "/bank/" + banks[i];
+		weblet = webon.include(path);
+		pattern = $("#template-queue").html();
+		$queue = $("<span>");
+		$bank = $("<li><b>"+path+"</b> -- </li>").append($queue);
+		suite = html2Suite(pattern, "attr", $queue);
+		weblet.showOn(suite);
+		
+		$("#queue").append($bank);
+	}
+</script>
+</html>
