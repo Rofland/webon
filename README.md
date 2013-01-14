@@ -13,6 +13,9 @@ A Web page monitors application states by subscribing to the nodes via Webon's J
 # How to Use Webon #
 
 As an application developer, you do two things.
-1. Create and maintain the hierarchy of nodes (via Java library).
-2. Write monitoring pages (via JavaScript library).
+ 1. Create and maintain the hierarchy of nodes (via Java library).
+ 2. Write monitoring pages (via JavaScript library).
 
+Please refer to example/webon/Example.java and web/index.html for detail. The simplest way to run the supplied example is to
+ 1. Import Webon as Eclipse project and Run example/webon.Example
+ 2. Open http://localhost:8300/ in JavaScript enabled browser.
