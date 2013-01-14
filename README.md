@@ -1,8 +1,8 @@
 # What is Webon #
 
-You may hear of some process monitoring tools that can tell about CPU usage, memory consumption, file descriptor counts, etc. But that is too little. Is my application working correctly? What has been done? What is being processed? What is in the queue?
+You may have heard of some tools that monitor CPU usage, memory consumption, file descriptor counts, etc. But that is too little. Is my application working correctly? What has been done? What is being processed? What is in the queue?
 
-Webon is a Java+JavaScript library bringing you the possibility and simplicity to address the above questions and, without exaggeration, to monitor literally anything inside your application.
+Webon is a Java+JavaScript library bringing you the capability and simplicity to address the above questions and, without exaggeration, to monitor literally anything inside your application.
 
 # How Does Webon Work #
 
