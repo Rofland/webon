@@ -31,7 +31,7 @@ public class TellSchema implements Action {
         try {
             json.array();
             json.value("branches");
-            json.value("publets");
+            json.value("leaves");
             json.value(Branch.class.getName());
             json.endArray();
         } catch (JSONException e) {
